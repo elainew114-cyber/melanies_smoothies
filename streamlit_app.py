@@ -13,13 +13,18 @@ name_on_order = st.text_input('Name on Smoothie:')
 st.write('The name on your Smoothie will be:', name_on_order)
 
 
-session = get_active_session()
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+from snowflake.snowpark import Session
+try:
+    session = get_active_session()
+except Exception:
+    session = 
+Session.builder.configs(st.secrets["snow flake"]).create()
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME')).to_pandas()
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:'
-    , my_dataframe
+    , my_dataframe['FRUIT_NAME']
     , max_selections=5
 )
 
