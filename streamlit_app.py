@@ -17,8 +17,7 @@ from snowflake.snowpark import Session
 try:
     session = get_active_session()
 except Exception:
-    session = 
-Session.builder.configs(st.secrets["snow flake"]).create()
+    session = Session.builder.configs(st.secrets["snowflake"]).create()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME')).to_pandas()
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
